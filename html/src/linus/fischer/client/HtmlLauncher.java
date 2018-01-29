@@ -3,7 +3,7 @@ package linus.fischer.client;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import linus.fischer.DeadlineGame;
+import linus.fischer.game.DeadlineGame;
 
 public class HtmlLauncher extends GwtApplication {
 
