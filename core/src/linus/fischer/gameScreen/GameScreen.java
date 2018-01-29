@@ -1,10 +1,12 @@
 package linus.fischer.gameScreen;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import linus.fischer.game.DeadlineGame;
 import linus.fischer.gameWorld.GameRenderer;
 import linus.fischer.gameWorld.GameWorld;
 import linus.fischer.util.AssetLoader;
+import linus.fischer.util.InputHandler;
 
 public class GameScreen implements Screen {
     private DeadlineGame game;
@@ -16,6 +18,7 @@ public class GameScreen implements Screen {
         AssetLoader.load();
         gameWorld = new GameWorld();
         gameRenderer = new GameRenderer(gameWorld);
+        Gdx.input.setInputProcessor(new InputHandler(gameWorld));
     }
 
     @Override
