@@ -1,6 +1,7 @@
 package linus.fischer.gameWorld;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -31,21 +32,35 @@ public class GameRenderer {
         batch.setProjectionMatrix(cam.combined);
         shapeRenderer.setProjectionMatrix(cam.combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        renderPlayers();
+        renderBounds();
         shapeRenderer.end();
+        batch.begin();
+        renderPlayers();
+        batch.end();
     }
 
     private void renderPlayers() {
-        shapeRenderer.setColor(gameWorld.getPlayer1().getColor());
-        shapeRenderer.rect(gameWorld.getPlayer1().getX() + ((viewport.getWorldWidth() - 512) / 2),
-                 gameWorld.getPlayer1().getY() + ((viewport.getWorldHeight() - 512) / 2), gameWorld.getPlayer1().getWidth(),
+        batch.draw(AssetLoader.orangePlayer, ((viewport.getWorldWidth() - 512) / 2) + gameWorld.getPlayer1().getX(),
+                ((viewport.getWorldHeight() - 512) / 2) + gameWorld.getPlayer1().getY(), gameWorld.getPlayer1().getWidth(),
                     gameWorld.getPlayer1().getHeight());
+    }
+
+    private void renderBounds() {
+        shapeRenderer.setColor(Color.BLUE);
+        shapeRenderer.rect(gameWorld.getBounds().getX() + ((viewport.getWorldWidth() -512) / 2), gameWorld.getBounds().getY() + ((viewport.getWorldHeight() - 512)  /2), gameWorld.getBounds().getWidth(), gameWorld.getBounds().getHeight());
     }
 
     public void resize(int width, int height) {
         viewport.update(width, height, true);
     }
 
+    public float getWorldWidth() {
+        return viewport.getWorldWidth();
+    }
+
+    public float getWorldHeight() {
+        return viewport.getWorldHeight();
+    }
 }
 
 
