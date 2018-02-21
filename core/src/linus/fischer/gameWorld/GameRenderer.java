@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import linus.fischer.gameobjects.Deadline;
 import linus.fischer.util.AssetLoader;
 
 public class GameRenderer {
@@ -33,6 +34,7 @@ public class GameRenderer {
         shapeRenderer.setProjectionMatrix(cam.combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         renderBounds();
+        renderDeadlines();
         shapeRenderer.end();
         batch.begin();
         renderPlayers();
@@ -46,8 +48,15 @@ public class GameRenderer {
     }
 
     private void renderBounds() {
-        shapeRenderer.setColor(Color.BLUE);
+        shapeRenderer.setColor(Color.WHITE);
         shapeRenderer.rect(gameWorld.getBounds().getX() + ((viewport.getWorldWidth() -512) / 2), gameWorld.getBounds().getY() + ((viewport.getWorldHeight() - 512)  /2), gameWorld.getBounds().getWidth(), gameWorld.getBounds().getHeight());
+    }
+
+    private void renderDeadlines() {
+        shapeRenderer.setColor(Color.GREEN);
+        for (Deadline deadline : gameWorld.getDeadlines()) {
+            shapeRenderer.rect(deadline.getX()+ ((viewport.getWorldWidth() -512) / 2), deadline.getY() + ((viewport.getWorldHeight() -512) / 2), deadline.getWidth(), deadline.getHeight());
+        }
     }
 
     public void resize(int width, int height) {

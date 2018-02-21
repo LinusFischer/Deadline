@@ -7,6 +7,8 @@ public class Player {
     private static final int VELOCITY = 100;
     private Direction direction;
     private Color color;
+    private boolean directionChanged;
+
 
 
     public Player(float x, float y, float size, Color color) {
@@ -53,6 +55,14 @@ public class Player {
         }
     }
 
+    public boolean getDirectionChanged() {
+        return  directionChanged;
+    }
+
+    public void setDirectionChanged(boolean b) {
+        directionChanged = b;
+    }
+
     public float getX() {
         return x;
     }
@@ -82,7 +92,10 @@ public class Player {
     }
 
     public void setDirection(Direction direction) {
-        this.direction = direction;
+        if (this.direction != direction) {
+            this.direction = direction;
+            directionChanged = true;
+        }
     }
 
     public Color getColor() {
