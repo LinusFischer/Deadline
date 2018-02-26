@@ -1,6 +1,7 @@
 package linus.fischer.gameobjects;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Rectangle;
 
 public class Player {
     private float x, y, width, height;
@@ -8,7 +9,9 @@ public class Player {
     private Direction direction;
     private Color color;
     private boolean directionChanged;
+    private boolean alive;
 
+    private Rectangle hitbox;
 
 
     public Player(float x, float y, float size, Color color) {
@@ -17,25 +20,31 @@ public class Player {
         width = size;
         height = size;
         this.color = color;
+        alive = true;
         setDirectionRandom();
+        hitbox = new Rectangle(x, y, width, height);
     }
 
     public void update(float delta) {
-        switch (direction) {
-            case UP:
-                y += VELOCITY*delta;
-                break;
-            case RIGHT:
-                x += VELOCITY * delta;
-                break;
-            case DOWN:
-                y -= VELOCITY * delta;
-                break;
-            case LEFT:
-                x -= VELOCITY * delta;
-                break;
+        if (alive) {
+            switch (direction) {
+                case UP:
+                    y += VELOCITY*delta;
+                    break;
+                case RIGHT:
+                    x += VELOCITY * delta;
+                    break;
+                case DOWN:
+                    y -= VELOCITY * delta;
+                    break;
+                case LEFT:
+                    x -= VELOCITY * delta;
+                    break;
+            }
         }
+        hitbox.set(x, y, width, height);
     }
+
 
     private void setDirectionRandom() {
         int r = (int) Math.round(Math.random() * 3);
@@ -98,7 +107,20 @@ public class Player {
         }
     }
 
+
     public Color getColor() {
         return color;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public Rectangle getHitbox() {
+        return hitbox;
     }
 }

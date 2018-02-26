@@ -42,9 +42,11 @@ public class GameRenderer {
     }
 
     private void renderPlayers() {
-        batch.draw(AssetLoader.orangePlayer, ((viewport.getWorldWidth() - 512) / 2) + gameWorld.getPlayer1().getX(),
-                ((viewport.getWorldHeight() - 512) / 2) + gameWorld.getPlayer1().getY(), gameWorld.getPlayer1().getWidth(),
+        if (gameWorld.getPlayer1().isAlive()) {
+            batch.draw(AssetLoader.orangePlayer, ((viewport.getWorldWidth() - 512) / 2) + gameWorld.getPlayer1().getX(),
+                    ((viewport.getWorldHeight() - 512) / 2) + gameWorld.getPlayer1().getY(), gameWorld.getPlayer1().getWidth(),
                     gameWorld.getPlayer1().getHeight());
+        }
     }
 
     private void renderBounds() {

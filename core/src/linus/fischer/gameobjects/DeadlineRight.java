@@ -12,12 +12,22 @@ public class DeadlineRight extends Deadline {
     }
 
     @Override
-    public void update(float xDiff, float yDiff) {
-        width = xDiff;
+    public void update(float playerX, float playerY) {
+        width = playerX - x;
+        super.update(playerX, playerY);
     }
 
     @Override
-    public void end() {
-        width--;
+    public void end(float delta) {
+        x += 512 * delta;
+        width -= 512 * delta;
+        if (width<=0) {
+            dead = true;
+        }
+    }
+
+    @Override
+    public void finish() {
+        width += gameWorld.getPlayer1().getWidth();
     }
 }

@@ -12,12 +12,22 @@ public class DeadlineUp extends Deadline {
     }
 
     @Override
-    public void update(float xDiff, float yDiff) {
-        height = yDiff;
+    public void update(float playerX, float playerY) {
+        height = playerY - y;
+        super.update(playerX, playerY);
     }
 
     @Override
-    public void end() {
-        height--;
+    public void end(float delta) {
+        y += 512 * delta;
+        height -= 512 * delta;
+        if (height<=0) {
+            dead = true;
+        }
+    }
+
+    @Override
+    public void finish() {
+        height += gameWorld.getPlayer1().getHeight();
     }
 }
