@@ -43,7 +43,7 @@ public class GameRenderer {
 
     private void renderPlayers() {
         if (gameWorld.getPlayer1().isAlive()) {
-            batch.draw(AssetLoader.orangePlayer, ((viewport.getWorldWidth() - 512) / 2) + gameWorld.getPlayer1().getX(),
+            batch.draw(AssetLoader.player_blue, ((viewport.getWorldWidth() - 512) / 2) + gameWorld.getPlayer1().getX(),
                     ((viewport.getWorldHeight() - 512) / 2) + gameWorld.getPlayer1().getY(), gameWorld.getPlayer1().getWidth(),
                     gameWorld.getPlayer1().getHeight());
         }
@@ -56,7 +56,7 @@ public class GameRenderer {
 
     private void renderDeadlines() {
         shapeRenderer.setColor(Color.GREEN);
-        for (Deadline deadline : gameWorld.getDeadlines()) {
+        for (Deadline deadline : gameWorld.getPlayer1().getDeadlines()) {
             shapeRenderer.rect(deadline.getX()+ ((viewport.getWorldWidth() -512) / 2), deadline.getY() + ((viewport.getWorldHeight() -512) / 2), deadline.getWidth(), deadline.getHeight());
         }
     }

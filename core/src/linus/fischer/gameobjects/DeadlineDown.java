@@ -6,8 +6,8 @@ public class DeadlineDown extends Deadline {
     private float originX;
     private float originY;
 
-    public DeadlineDown(Player player, GameWorld gameWorld, float lastX, float lastY, boolean ported) {
-        super(player.getX(), lastY+gameWorld.getPlayer1().getHeight(), player.getWidth(), 0, gameWorld);
+    public DeadlineDown(Player player, float lastX, float lastY, boolean ported) {
+        super(player, player.getX(), lastY+player.getHeight(), player.getWidth(), 0);
         if (ported) {
             super.x = lastX;
             super.y = player.getY();

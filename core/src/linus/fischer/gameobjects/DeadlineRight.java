@@ -3,8 +3,8 @@ package linus.fischer.gameobjects;
 import linus.fischer.gameWorld.GameWorld;
 
 public class DeadlineRight extends Deadline {
-    public DeadlineRight(Player player, GameWorld gameWorld, float lastX, float lastY, boolean ported) {
-        super(lastX, player.getY(), 0, player.getHeight(), gameWorld);
+    public DeadlineRight(Player player, float lastX, float lastY, boolean ported) {
+        super(player, lastX, player.getY(), 0, player.getHeight());
         if (ported) {
             super.y = lastY;
             super.x = player.getX();
@@ -28,6 +28,6 @@ public class DeadlineRight extends Deadline {
 
     @Override
     public void finish() {
-        width += gameWorld.getPlayer1().getWidth();
+        width += player.getWidth();
     }
 }

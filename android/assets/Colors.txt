@@ -1,0 +1,8 @@
+Green : #39FF14
+Orange : #FF3300
+Blue : #0033FF
+Purpel : #6E0DD0
+Yellow : #F2EA02
+Light_Blue _ #0099FF
+Red : #FF0000
+Pink : #FF00FF

@@ -3,8 +3,8 @@ package linus.fischer.gameobjects;
 import linus.fischer.gameWorld.GameWorld;
 
 public class DeadlineUp extends Deadline {
-    public DeadlineUp(Player player, GameWorld gameWorld, float lastX, float lastY, boolean ported) {
-        super(player.getX(), lastY, player.getWidth(), 0, gameWorld);
+    public DeadlineUp(Player player, float lastX, float lastY, boolean ported) {
+        super(player, player.getX(), lastY, player.getWidth(), 0);
         if (ported) {
             super.x = lastX;
             super.y = player.getY();
@@ -28,6 +28,6 @@ public class DeadlineUp extends Deadline {
 
     @Override
     public void finish() {
-        height += gameWorld.getPlayer1().getHeight();
+        height += player.getHeight();
     }
 }
