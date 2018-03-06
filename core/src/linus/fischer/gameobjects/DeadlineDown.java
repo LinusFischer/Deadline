@@ -17,10 +17,10 @@ public class DeadlineDown extends Deadline {
     }
 
     @Override
-    public void update(float playerX, float playerY) {
-        y = playerY;
-        height = originY - playerY;
-        super.update(playerX, playerY);
+    public void update() {
+        y = player.getY() + player.getHeight();
+        height = originY - player.getY()- player.getHeight();
+        super.update();
     }
 
     @Override
@@ -29,5 +29,11 @@ public class DeadlineDown extends Deadline {
         if (height<=0) {
             dead = true;
         }
+    }
+
+    @Override
+    public void finish() {
+        y -= player.getHeight();
+        height += player.getHeight();
     }
 }

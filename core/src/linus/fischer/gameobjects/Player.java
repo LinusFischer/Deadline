@@ -9,7 +9,7 @@ public class Player {
     private float x, y, width, height;
     private static final int VELOCITY = 100;
     private Direction direction;
-    private Color color;
+    private BasicColors color;
     private boolean directionChanged;
     private boolean alive;
     private ArrayList<Deadline> deadlines;
@@ -17,7 +17,7 @@ public class Player {
     private boolean emptyDeadlines;
 
 
-    public Player(float x, float y, float size, Color color) {
+    public Player(float x, float y, float size, BasicColors color) {
         this.x = x;
         this.y = y;
         width = size;
@@ -146,7 +146,7 @@ public class Player {
     }
 
     public void updateDeadline() {
-        deadlines.get(deadlines.size()-1).update(x, y);
+        deadlines.get(deadlines.size()-1).update();
     }
 
     public boolean emptyDeadlines(float delta) {
@@ -159,11 +159,6 @@ public class Player {
             return false;
         }
         return true;
-    }
-
-
-    public Color getColor() {
-        return color;
     }
 
     public void setAlive(boolean alive) {
@@ -188,5 +183,9 @@ public class Player {
 
     public boolean getEmptyDeadlines() {
         return emptyDeadlines;
+    }
+
+    public BasicColors getColor() {
+        return color;
     }
 }

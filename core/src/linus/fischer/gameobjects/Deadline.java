@@ -21,7 +21,7 @@ public class Deadline {
         killOwnPlayer = false;
     }
 
-    public void update(float playerX, float playerY) {
+    public void update() {
         hitbox.set(x, y, width, height);
     }
 

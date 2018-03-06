@@ -36,16 +36,21 @@ public class GameRenderer {
         renderBounds();
         renderDeadlines();
         shapeRenderer.end();
-        batch.begin();
         renderPlayers();
-        batch.end();
     }
 
     private void renderPlayers() {
         if (gameWorld.getPlayer1().isAlive()) {
-            batch.draw(AssetLoader.player_blue, ((viewport.getWorldWidth() - 512) / 2) + gameWorld.getPlayer1().getX(),
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            shapeRenderer.setColor(gameWorld.getPlayer1().getColor().getColor());
+            shapeRenderer.rect(((viewport.getWorldWidth()-512) /2)+gameWorld.getPlayer1().getX()+(gameWorld.getPlayer1().getWidth()/10), ((viewport.getWorldHeight() - 512) / 2)+gameWorld.getPlayer1().getY()+(gameWorld.getPlayer1().getHeight()/10),
+                    gameWorld.getPlayer1().getWidth()-gameWorld.getPlayer1().getWidth()/5, gameWorld.getPlayer1().getHeight()-gameWorld.getPlayer1().getHeight()/5);
+            shapeRenderer.end();
+            batch.begin();
+            batch.draw(AssetLoader.player, ((viewport.getWorldWidth() - 512) / 2) + gameWorld.getPlayer1().getX(),
                     ((viewport.getWorldHeight() - 512) / 2) + gameWorld.getPlayer1().getY(), gameWorld.getPlayer1().getWidth(),
                     gameWorld.getPlayer1().getHeight());
+            batch.end();
         }
     }
 

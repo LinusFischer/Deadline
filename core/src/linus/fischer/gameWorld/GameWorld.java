@@ -9,7 +9,7 @@ public class GameWorld {
     private Rectangle bounds;
 
     public GameWorld() {
-        player1 = new Player(256, 256, 8, Color.ORANGE);
+        player1 = new Player(256, 256, 10, BasicColors.BLUE);
         bounds = new Rectangle();
         bounds.width = 512;
         bounds.height = 512;
@@ -39,10 +39,10 @@ public class GameWorld {
         if (player1.getX()  < bounds.getX()) {
             player1.setX(bounds.getX()+bounds.getWidth());
             player1.addDeadline(true);
-            //TODO Enable Collision with own player for last Deadline(cant be added like others(bug)
             if (player1.getDeadlines().size()-3>=0) {
                 player1.getDeadlines().get(player1.getDeadlines().size()-3).setKillOwnPlayer(true);
             }
+            player1.getDeadlines().get(player1.getDeadlines().size()-2).finish();
         } else {
             if (player1.getX() > bounds.getX() + bounds.getWidth()) {
                 player1.setX(bounds.getX());
@@ -57,10 +57,10 @@ public class GameWorld {
         if (player1.getY() < bounds.getY()) {
             player1.setY(bounds.getY() + bounds.getHeight());
             player1.addDeadline(true);
-            //TODO Enable Collision with own player for last Deadline(cant be added like others(bug)
             if (player1.getDeadlines().size()-3>=0) {
                 player1.getDeadlines().get(player1.getDeadlines().size()-3).setKillOwnPlayer(true);
             }
+            player1.getDeadlines().get(player1.getDeadlines().size()-2).finish();
         } else {
             if (player1.getY() > bounds.getY() + bounds.getHeight()) {
                 player1.setY(bounds.getY());
@@ -87,9 +87,7 @@ public class GameWorld {
     private void killPlayer() {
         player1.setAlive(false);
         player1.setEmptyDeadlines(true);
-        if (player1.getDeadlines().get(player1.getDeadlines().size()-1).getClass() == DeadlineUp.class || player1.getDeadlines().get(player1.getDeadlines().size()-1).getClass() == DeadlineRight.class) {
-            player1.getDeadlines().get(player1.getDeadlines().size()-1).finish();
-        }
+        player1.getDeadlines().get(player1.getDeadlines().size()-1).finish();
     }
     public Player getPlayer1() {
         return player1;
