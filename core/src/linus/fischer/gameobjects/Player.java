@@ -2,6 +2,7 @@ package linus.fischer.gameobjects;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
 
@@ -17,9 +18,9 @@ public class Player {
     private boolean emptyDeadlines;
 
 
-    public Player(float x, float y, float size, BasicColors color) {
-        this.x = x;
-        this.y = y;
+    public Player(Vector2 coords, float size, BasicColors color) {
+        this.x = coords.x;
+        this.y = coords.y;
         width = size;
         height = size;
         this.color = color;
