@@ -2,6 +2,7 @@ package linus.fischer.gameWorld;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import linus.fischer.gameobjects.*;
 
 public class GameWorld {
@@ -9,7 +10,7 @@ public class GameWorld {
     private Rectangle bounds;
 
     public GameWorld() {
-        player1 = new Player(256, 256, 10, BasicColors.BLUE);
+        player1 = new Player(generateCoords(), 10, BasicColors.BLUE);
         bounds = new Rectangle();
         bounds.width = 512;
         bounds.height = 512;
@@ -88,6 +89,13 @@ public class GameWorld {
         player1.setAlive(false);
         player1.setEmptyDeadlines(true);
         player1.getDeadlines().get(player1.getDeadlines().size()-1).finish();
+    }
+
+    private Vector2 generateCoords() {
+        Vector2 v = new Vector2();
+        v.x = (float) (Math.random()*462) + 20;
+        v.y = (float) (Math.random()*462) + 20;
+        return v;
     }
     public Player getPlayer1() {
         return player1;
