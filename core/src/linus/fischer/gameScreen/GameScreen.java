@@ -15,10 +15,12 @@ public class GameScreen implements Screen {
 
     public GameScreen(DeadlineGame game) {
         this.game = game;
-        AssetLoader.load();
         gameWorld = new GameWorld();
         gameRenderer = new GameRenderer(gameWorld);
-        Gdx.input.setInputProcessor(new InputHandler(gameWorld));
+    }
+
+    public GameWorld getGameWorld() {
+        return gameWorld;
     }
 
     @Override

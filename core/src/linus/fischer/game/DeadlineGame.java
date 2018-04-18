@@ -7,14 +7,29 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import linus.fischer.gameScreen.GameScreen;
+import linus.fischer.gameScreen.MenuScreen;
+import linus.fischer.util.AssetLoader;
+import linus.fischer.util.InputHandler;
 
 public class DeadlineGame extends Game {
+	private MenuScreen menuScreen;
 	private GameScreen gameScreen;
 	
 	@Override
 	public void create () {
+		AssetLoader.load();
+		menuScreen = new MenuScreen(this);
 		gameScreen = new GameScreen(this);
-		setScreen(gameScreen);
+		setScreen(menuScreen);
+		Gdx.input.setInputProcessor(new InputHandler(this));
+	}
+
+	public GameScreen getGameScreen() {
+		return gameScreen;
+	}
+
+	public MenuScreen getMenuScreen() {
+		return menuScreen;
 	}
 
 	@Override
