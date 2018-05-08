@@ -1,12 +1,10 @@
 package linus.fischer.gameobjects;
 
-import linus.fischer.gameWorld.GameWorld;
-
 public class DeadlineLeft extends Deadline {
     private float originX;
     private float originY;
 
-    public DeadlineLeft(Player player, float lastX, float lastY, boolean ported) {
+    DeadlineLeft(Player player, float lastX, float lastY, boolean ported) {
         super(player,lastX+player.getWidth(), player.getY(), 0, player.getHeight());
         if (ported) {
             super.y = lastY;
@@ -25,7 +23,7 @@ public class DeadlineLeft extends Deadline {
 
     @Override
     public void end(float delta) {
-        width -= 512 * delta;
+        width -= 512 * 5 * delta;
         if (width<=0) {
             dead = true;
         }

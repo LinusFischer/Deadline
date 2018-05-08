@@ -4,55 +4,70 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import linus.fischer.game.DeadlineGame;
+import linus.fischer.gameWorld.GameState;
 import linus.fischer.util.AssetLoader;
 
 import java.util.ArrayList;
 
+enum Menus {
+    MAIN,
+    SINGLEPLAYER,
+    MULTIPLAYER
+}
 
 public class MenuScreen implements Screen {
     private DeadlineGame game;
-    private SpriteBatch batch;
-    private Skin neon;
+    private Skin quantumHorizon;
     private Stage stage;
-    private ArrayList<TextButton> buttons;
+    private Table ui;
+    ArrayList<TextButton> mainButtons;
+    ArrayList<TextButton> multiplayerButtons;
 
-    public MenuScreen(DeadlineGame game) {
+    public MenuScreen(DeadlineGame game, Viewport viewport) {
         this.game = game;
-        batch = new SpriteBatch();
-        neon = AssetLoader.neon;
-        stage = new Stage();
-        buttons = new ArrayList<>();
-        initButtons();
+        quantumHorizon = AssetLoader.quantumHorizon;
+        stage = new Stage(viewport);
+        ui = new Table();
+        ui.setFillParent(true);
     }
 
-    private void initButtons() {
+    public void init() {
         ArrayList<String> buttonLabels = new ArrayList<>();
+        ArrayList<TextButton> buttons = new ArrayList<>();
         buttonLabels.add("Singleplayer");
-        buttonLabels.add("Multiplayer");
-        buttonLabels.add("Options");
+        buttonLabels.add("Multiplayer ");
+        buttonLabels.add("  Options   ");
 
-        float gap = Gdx.graphics.getWidth()/24;
-        float positionY = Gdx.graphics.getWidth()/12*buttonLabels.size() + gap * (buttonLabels.size() -1);
-        positionY += (Gdx.graphics.getHeight() - positionY)/2;
-        float positionX = Gdx.graphics.getWidth()/3;
-
+        //TODO add listeners to buttons
         for (String label : buttonLabels) {
-            TextButton button = new TextButton(label, neon, "default");
-            button.setWidth(Gdx.graphics.getWidth()/3);
-            button.setHeight(Gdx.graphics.getWidth()/12);
-            button.setPosition(positionX, positionY);
-            positionY = positionY - button.getHeight();
+            TextButton button = new TextButton(label, quantumHorizon, "default");
+
+            ui.add(button).prefWidth(Gdx.graphics.getWidth()/3).pad(5);
+            ui.row();
+
             buttons.add(button);
-            stage.addActor(button);
         }
+        stage.addActor(ui);
+
+        buttons.get(1).addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                game.setState(GameState.GAME);
+            }
+        });
     }
 
-    public ArrayList<TextButton> getButtons() {
-        return buttons;
+
+    public Stage getStage() {
+        return stage;
     }
 
     @Override
@@ -62,16 +77,11 @@ public class MenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.begin();
-        stage.draw();
-        batch.end();
     }
 
     @Override
     public void resize(int width, int height) {
-
+        game.resize(width, height);
     }
 
     @Override

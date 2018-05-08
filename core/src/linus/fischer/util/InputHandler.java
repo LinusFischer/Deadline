@@ -29,26 +29,53 @@ public class InputHandler implements InputProcessor {
     public boolean keyDown(int keycode) {
         if (game.getScreen().getClass() == GameScreen.class) {
             switch (keycode) {
-                case Input.Keys.W :
-                    if (!(gameWorld.getPlayer1().getDirection() == Direction.DOWN)) {
-                        gameWorld.getPlayer1().setDirection(Direction.UP);
+                case Input.Keys.W:
+                    if (!(gameWorld.getPlayers().get(0).getDirection() == Direction.DOWN)) {
+                        gameWorld.getPlayers().get(0).setDirection(Direction.UP);
                     }
                     return true;
-                case Input.Keys.D :
-                    if (!(gameWorld.getPlayer1().getDirection() == Direction.LEFT)) {
-                        gameWorld.getPlayer1().setDirection(Direction.RIGHT);
+                case Input.Keys.D:
+                    if (!(gameWorld.getPlayers().get(0).getDirection() == Direction.LEFT)) {
+                        gameWorld.getPlayers().get(0).setDirection(Direction.RIGHT);
                     }
                     return true;
-                case Input.Keys.S :
-                    if (!(gameWorld.getPlayer1().getDirection() == Direction.UP)) {
-                        gameWorld.getPlayer1().setDirection(Direction.DOWN);
+                case Input.Keys.S:
+                    if (!(gameWorld.getPlayers().get(0).getDirection() == Direction.UP)) {
+                        gameWorld.getPlayers().get(0).setDirection(Direction.DOWN);
                     }
                     return true;
-                case Input.Keys.A :
-                    if (!(gameWorld.getPlayer1().getDirection() == Direction.RIGHT)) {
-                        gameWorld.getPlayer1().setDirection(Direction.LEFT);
+                case Input.Keys.A:
+                    if (!(gameWorld.getPlayers().get(0).getDirection() == Direction.RIGHT)) {
+                        gameWorld.getPlayers().get(0).setDirection(Direction.LEFT);
                     }
                     return true;
+                case Input.Keys.UP:
+                    if (gameWorld.getPlayers().size()>=2) {
+                        if (!(gameWorld.getPlayers().get(1).getDirection() == Direction.DOWN)) {
+                            gameWorld.getPlayers().get(1).setDirection(Direction.UP);
+                        }
+                    }
+                    return true;
+                case Input.Keys.RIGHT:
+                    if (gameWorld.getPlayers().size()>=2) {
+                        if (!(gameWorld.getPlayers().get(1).getDirection() == Direction.LEFT)) {
+                            gameWorld.getPlayers().get(1).setDirection(Direction.RIGHT);
+                        }
+                    }
+                    return true;
+                case Input.Keys.DOWN:
+                    if (gameWorld.getPlayers().size()>=2) {
+                        if (!(gameWorld.getPlayers().get(1).getDirection() == Direction.UP)) {
+                            gameWorld.getPlayers().get(1).setDirection(Direction.DOWN);
+                        }
+                    }
+                    return true;
+                case Input.Keys.LEFT:
+                    if (gameWorld.getPlayers().size()>=2) {
+                        if (!(gameWorld.getPlayers().get(1).getDirection() == Direction.RIGHT)) {
+                            gameWorld.getPlayers().get(1).setDirection(Direction.LEFT);
+                        }
+                    }
             }
         }
 
@@ -67,17 +94,6 @@ public class InputHandler implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        /*ArrayList<TextButton>  buttons = menuScreen.getButtons();
-        for (int i=0; i<buttons.size(); i++) {
-           float buttonX = buttons.get(i).getX();
-           float buttonY = buttons.get(i).getY();
-           float buttonWidth = buttons.get(i).getWidth();
-           float buttonHeight = buttons.get(i).getHeight();
-           if (buttonX < screenX && (buttonX + buttonWidth) > screenX && buttonY < screenY && (buttonY + buttonHeight) > screenY) {
-
-               buttons.get(i).setStyle();
-           }
-        }*/
         return false;
     }
 

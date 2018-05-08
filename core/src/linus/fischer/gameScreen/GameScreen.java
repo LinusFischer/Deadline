@@ -11,12 +11,11 @@ import linus.fischer.util.InputHandler;
 public class GameScreen implements Screen {
     private DeadlineGame game;
     private GameWorld gameWorld;
-    private GameRenderer gameRenderer;
 
     public GameScreen(DeadlineGame game) {
         this.game = game;
-        gameWorld = new GameWorld();
-        gameRenderer = new GameRenderer(gameWorld);
+        gameWorld = new GameWorld(2);
+
     }
 
     public GameWorld getGameWorld() {
@@ -31,12 +30,11 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         gameWorld.update(delta);
-        gameRenderer.render();
     }
 
     @Override
     public void resize(int width, int height) {
-        gameRenderer.resize(width, height);
+        game.resize(width, height);
     }
 
     @Override

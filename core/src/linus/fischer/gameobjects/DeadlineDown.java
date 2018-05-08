@@ -1,12 +1,12 @@
 package linus.fischer.gameobjects;
 
-import linus.fischer.gameWorld.GameWorld;
+import linus.fischer.util.Var;
 
 public class DeadlineDown extends Deadline {
     private float originX;
     private float originY;
 
-    public DeadlineDown(Player player, float lastX, float lastY, boolean ported) {
+    DeadlineDown(Player player, float lastX, float lastY, boolean ported) {
         super(player, player.getX(), lastY+player.getHeight(), player.getWidth(), 0);
         if (ported) {
             super.x = lastX;
@@ -25,7 +25,7 @@ public class DeadlineDown extends Deadline {
 
     @Override
     public void end(float delta) {
-        height -= 512 * delta;
+        height -= Var.velocity * 5 * delta;
         if (height<=0) {
             dead = true;
         }

@@ -10,7 +10,7 @@ public class DesktopLauncher {
 		if (System.getProperty("os.name").startsWith("Windows")) {
 			config.x = LwjglApplicationConfiguration.getDesktopDisplayMode().width/2-4;
 			config.y = 0;
-			config.width = LwjglApplicationConfiguration.getDesktopDisplayMode().width /2;
+			config.width = LwjglApplicationConfiguration.getDesktopDisplayMode().width / 2;
 			config.height = LwjglApplicationConfiguration.getDesktopDisplayMode().height - 66;
 		} else {
 			config.x = LwjglApplicationConfiguration.getDesktopDisplayMode().width / 2;

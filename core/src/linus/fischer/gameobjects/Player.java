@@ -3,14 +3,14 @@ package linus.fischer.gameobjects;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import linus.fischer.util.Var;
 
 import java.util.ArrayList;
 
 public class Player {
     private float x, y, width, height;
-    private static final int VELOCITY = 100;
     private Direction direction;
-    private BasicColors color;
+    private Color color;
     private boolean directionChanged;
     private boolean alive;
     private ArrayList<Deadline> deadlines;
@@ -18,7 +18,7 @@ public class Player {
     private boolean emptyDeadlines;
 
 
-    public Player(Vector2 coords, float size, BasicColors color) {
+    public Player(Vector2 coords, float size, Color color) {
         this.x = coords.x;
         this.y = coords.y;
         width = size;
@@ -27,7 +27,7 @@ public class Player {
         alive = true;
         setDirectionRandom();
         hitbox = new Rectangle(x, y, width, height);
-        deadlines = new ArrayList<Deadline>();
+        deadlines = new ArrayList<>();
         emptyDeadlines = false;
 
         switch (direction) {
@@ -50,16 +50,16 @@ public class Player {
         if (alive) {
             switch (direction) {
                 case UP:
-                    y += VELOCITY*delta;
+                    y += Var.velocity*delta;
                     break;
                 case RIGHT:
-                    x += VELOCITY * delta;
+                    x += Var.velocity * delta;
                     break;
                 case DOWN:
-                    y -= VELOCITY * delta;
+                    y -= Var.velocity * delta;
                     break;
                 case LEFT:
-                    x -= VELOCITY * delta;
+                    x -= Var.velocity * delta;
                     break;
             }
         }
@@ -186,7 +186,7 @@ public class Player {
         return emptyDeadlines;
     }
 
-    public BasicColors getColor() {
+    public Color getColor() {
         return color;
     }
 }
